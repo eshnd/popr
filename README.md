@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">Popr</h1>
 </p>
-<p align="center">A package manager for the Popcorn language<br>(by <a href="https://eshnd.github.io/">@eshnd</a>)<p>
+<p align="center">The official package manager for the Popcorn language<br>(by <a href="https://eshnd.github.io/">@eshnd</a>)<p>
   
 ### [Read the Popcorn docs →](https://github.com/eshnd/popcorn/wiki/Documentation)
 ## About
