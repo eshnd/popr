@@ -73,6 +73,10 @@ if __name__ == "__main__":
         main = data[0]
         with open(main, "r") as f:
             main = f.read()
+        
+        setup = main[0:index(";") + 1]
+        main = main[index(";") + 1:]
+
         compiler = data[-1]
         data = data[1:-1]
         filetexts = []
@@ -90,6 +94,7 @@ if __name__ == "__main__":
 
         for text in filetexts:
             main = text + main
+        main = setup + main
         
         with open("temp.popr", "w") as f:
             f.write(main)
