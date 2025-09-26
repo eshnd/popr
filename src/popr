@@ -1,6 +1,7 @@
 #!/bin/python3
 import sys
 import os
+import re
 import pickle
 import argparse
 import requests
