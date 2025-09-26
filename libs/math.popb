@@ -1,6 +1,6 @@
 float: $pi, 3.14;
 
-pack: fillRegisters,
+pack: $fillRegisters,
     int: $var1, #1;
     int: $var2, #2;
     int: $var3, #3;
