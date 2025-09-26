@@ -1,0 +1,52 @@
+#!/bin/python3
+import sys
+import os
+import pickle
+import argparse
+import requests
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "set", type=str, help="sets your main file")
+    parser.add_argument("-a", "add", type=str, nargs="+", help="installs files to project")
+    parser.add_argument("-i", "install", type=str, nargs="+", help="installs online libraries to project")
+    parser.add_argument("-c", "compiler", type=str, help="sets compiler")
+
+    parser.add_argument("command", nargs="?", choices=["run"], help="run the program")
+    # ^^^ will recompile and run popcorn
+
+    args = parser.parse_args()
+
+    if args.set:
+        if os.path.exists("index.popr"):
+            with open("index.popr", "rb") as f:
+                data = pickle.load(f)
+        else:
+            data = []
+
+        data.insert(0, os.path.abspath(args.set))
+        with open("index.popr", "wb") as f:
+            pickle.dump(data)
+
+    if args.add:
+        if os.path.exists("index.popr"):
+            with open("index.popr", "rb") as f:
+                data = pickle.load(f)
+        else:
+            data = []
+
+        data.append(os.path.abspath(args.add))
+        with open("index.popr", "wb") as f:
+            pickle.dump(data)
+
+    if args.install:
+        if os.path.exists("index.popr"):
+            with open("index.popr", "rb") as f:
+                data = pickle.load(f)
+        else:
+            data = []
+
+        data.append("https://raw.githubusercontent.com/eshnd/popr/refs/heads/main/libs/" + args.add + ".popb")
+        with open("index.popr", "wb") as f:
+            pickle.dump(data)
+
