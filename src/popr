@@ -94,7 +94,7 @@ if __name__ == "__main__":
 
         for text in filetexts:
             main = text + main
-        main = setup + main + "\nhlt"
+        main = setup + main
         
         with open("temp.popr", "w") as f:
             f.write(main)
