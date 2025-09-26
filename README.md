@@ -7,7 +7,7 @@
 ## About
 This package manager allows you to install local AND online libraries to your Popcorn kernel development projects.
 ## Install
-You have to have popcorn installed before installing Popr. Once you have done so, this Popr install script works on *NIX (and WSL): `sudo wget -O /usr/local/bin/popr https://raw.githubusercontent.com/eshnd/popr/refs/heads/main/popr && sudo chmod +x /usr/local/bin/popr`
+You have to have popcorn installed before installing Popr. Once you have done so, this Popr install script works on *NIX (and WSL): `sudo wget -O /usr/local/bin/popr https://raw.githubusercontent.com/eshnd/popr/refs/heads/main/src/popr && sudo chmod +x /usr/local/bin/popr`
 ## Run
 ```
 usage: popr [-h] [-s SET] [-a ADD [ADD ...]] [-i INSTALL [INSTALL ...]] [-c COMPILER]
