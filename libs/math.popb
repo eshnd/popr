@@ -1,10 +1,17 @@
 float: $pi, 3.14;
 
 pack: $&fillRegisters,
-    int: $var1, #1;
-    int: $var2, #2;
-    int: $var3, #3;
-    int: $var4, #4;
-    int: $var5, #5;
-    int: $var6, #6;
+    int: $var1*, #1;
+    int: $var2*, #2;
+    int: $var3*, #3;
+    int: $var4*, #4;
+    int: $var5*, #5;
+    int: $var6*, #6;
 ;&
+
+`
+not-hard-coded syntax rules:
+- var names must start with $
+- pack names must start with $&
+- var names inside of packs must start with $ and end with *
+`
