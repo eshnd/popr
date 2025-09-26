@@ -21,11 +21,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.set:
-        if os.path.exists("index.popr"):
-            with open("index.popr", "rb") as f:
-                data = pickle.load(f)
-        else:
-            data = []
+        data = []
 
         data.insert(0, os.path.abspath(args.set))
         with open("index.popr", "wb") as f:
@@ -79,8 +75,9 @@ if __name__ == "__main__":
                 data = pickle.load(f)
         else:
             data = []
-
-        data.append(os.path.abspath(args.compiler))
+        a = os.path.abspath(args.compiler)
+        if a not in data:
+            data.append(a)
         with open("index.popr", "wb") as f:
             pickle.dump(data, f)
     
