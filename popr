@@ -8,12 +8,12 @@ import subprocess
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "set", type=str, help="sets your main file")
-    parser.add_argument("-a", "add", type=str, nargs="+", help="installs bundles to project")
-    parser.add_argument("-i", "install", type=str, nargs="+", help="installs online bundles to project")
-    parser.add_argument("-c", "compiler", type=str, help="sets compiler")
-    parser.add_argument("-o", "output", type=str, help="sets output file")
-    parser.add_argument("-asm", "assembly", type=str, help="sets assembly output file")
+    parser.add_argument("-s", "--set", type=str, help="sets your main file")
+    parser.add_argument("-a", "--add", type=str, nargs="+", help="installs bundles to project")
+    parser.add_argument("-i", "--install", type=str, nargs="+", help="installs online bundles to project")
+    parser.add_argument("-c", "--compiler", type=str, help="sets compiler")
+    parser.add_argument("-o", "--output", type=str, help="sets output file")
+    parser.add_argument("-asm", "--assembly", type=str, help="sets assembly output file")
 
     parser.add_argument("command", nargs="?", choices=["run"], help="run the program")
 
@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
         data.insert(0, os.path.abspath(args.set))
         with open("index.popr", "wb") as f:
-            pickle.dump(data)
+            pickle.dump(data, f)
 
     if args.add:
         if os.path.exists("index.popr"):
@@ -36,10 +36,10 @@ if __name__ == "__main__":
                 data = pickle.load(f)
         else:
             data = []
-
-        data.append(os.path.abspath(args.add))
+        for i in args.add:
+            data.insert(1, os.path.abspath(i))
         with open("index.popr", "wb") as f:
-            pickle.dump(data)
+            pickle.dump(data, f)
 
     if args.install:
         if os.path.exists("index.popr"):
@@ -47,10 +47,10 @@ if __name__ == "__main__":
                 data = pickle.load(f)
         else:
             data = []
-
-        data.append("https://raw.githubusercontent.com/eshnd/popr/refs/heads/main/libs/" + args.install + ".popb")
+        for i in args.install:
+            data.insert(1, "https://raw.githubusercontent.com/eshnd/popr/refs/heads/main/libs/" + i + ".popb")
         with open("index.popr", "wb") as f:
-            pickle.dump(data)
+            pickle.dump(data, f)
     
     if args.compiler:
         if os.path.exists("index.popr"):
@@ -59,9 +59,9 @@ if __name__ == "__main__":
         else:
             data = []
 
-        data.insert(-1, os.path.abspath(args.add))
+        data.append(os.path.abspath(args.compiler))
         with open("index.popr", "wb") as f:
-            pickle.dump(data)
+            pickle.dump(data, f)
     
     if args.command == "run":
         if os.path.exists("index.popr"):
@@ -85,7 +85,7 @@ if __name__ == "__main__":
                 filetexts.append(requests.get(filename).text)
             
             f = filename.replace("https://raw.githubusercontent.com/eshnd/popr/refs/heads/main/libs/", "")
-            f = filename.replace(".popb", "")
+            f = f.replace(".popb", "")
             filetexts[-1] = filetexts[-1].replace("$", "$" + f + ".")
 
         for text in filetexts:
@@ -94,8 +94,6 @@ if __name__ == "__main__":
         with open("temp.popr", "w") as f:
             f.write(main)
         
-        print(main) # FOR DEBUGGING
-
         if args.assembly:
             subprocess.run([compiler, "temp.popr", args.output, args.assembly], check=True)
         else:
