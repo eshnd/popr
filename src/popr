@@ -37,12 +37,12 @@ if __name__ == "__main__":
             a = os.path.abspath(i)
             if a not in data:
                 data.insert(1, a)
-            with (data[1], "r") as f:
+            with open(i, "r") as f:
                 s = f.read()
             s = re.findall(r"\$(.*?)\,", s)
             print(f"added {i}, you now have access to all of these objects:")
             for j in s:
-                print(" - $" + i + "." + j.strip())
+                print(" - $" + i.replace(".popb","") + "." + j.strip())
             if len(s) == 0:
                 print("NONE")
 
@@ -113,7 +113,6 @@ if __name__ == "__main__":
         for text in filetexts:
             main = text + main
         main = setup + main
-        main += "\nhlt"
 
         with open("temp.popr", "w") as f:
             f.write(main)
