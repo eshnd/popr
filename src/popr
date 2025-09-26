@@ -38,7 +38,9 @@ if __name__ == "__main__":
         else:
             data = []
         for i in args.add:
-            data.insert(1, os.path.abspath(i))
+            a = os.path.abspath(i)
+            if a not in data:
+                data.insert(1, a)
             with (data[1], "r") as f:
                 s = f.read()
             s = re.findall(r"\$(.*?)\,", s)
@@ -58,7 +60,9 @@ if __name__ == "__main__":
         else:
             data = []
         for i in args.install:
-            data.insert(1, "https://raw.githubusercontent.com/eshnd/popr/refs/heads/main/libs/" + i + ".popb")
+            a = "https://raw.githubusercontent.com/eshnd/popr/refs/heads/main/libs/" + i + ".popb"
+            if a not in data:
+                data.insert(1, a)
             s = requests.get(data[1]).text
             s = re.findall(r"\$(.*?)\,", s)
             print(f"installed {i}, you now have access to all of these objects:")
