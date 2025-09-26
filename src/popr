@@ -74,8 +74,8 @@ if __name__ == "__main__":
         with open(main, "r") as f:
             main = f.read()
         
-        setup = main[0:index(";") + 1]
-        main = main[index(";") + 1:]
+        setup = main[0:main.index(";") + 1]
+        main = main[main.index(";") + 1:]
 
         compiler = data[-1]
         data = data[1:-1]
